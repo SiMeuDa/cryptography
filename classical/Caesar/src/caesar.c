@@ -2,7 +2,6 @@
 #define __STDC_WANT_LIB_EXT1__ 1
 #include <string.h>
 #include <stdlib.h>
-#include <stdio.h>
 
 caesar_status_t caesar_encrypt(
 	const char* plaintext,
