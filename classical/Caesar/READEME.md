@@ -1,11 +1,35 @@
-Introduction
+## Introduction
 
-Algorithm
+- One of the earliest cipher system.
 
-Project Structure
+- Each letter is shifted by key value
 
-Build
+- Key space is 26
 
-Usage
+## Algorithm
 
-Reference
+- Caesar encryption
+- Caesar decryption
+- Brute-force attack
+- Frequency analysis attack
+
+## Project Structure
+
+├── include/
+├── src/
+├── analysis/
+├── test/
+├── docs/
+└── README.md
+
+## Build
+
+
+
+## Usage
+
+
+
+## Reference
+
+- WIKIPEDIA (Caesar cipher)
