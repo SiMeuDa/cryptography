@@ -1,6 +1,34 @@
+/******************************************************************************
+ * @file    caesar.h
+ * @brief   Implementation of the Caesar cipher.
+ *
+ * @author  Ye-Seong Kwon
+ *
+ * @date    2026-08-02
+ *
+ * @details
+ * This file implements the Caesar cipher.
+ ******************************************************************************/
+
 #ifndef CAESAR_H
 #define CAESAR_H
 
+/**
+ * @brief
+ * Constants for alphabet's range
+ * size of alphabet is 26 (A - Z)
+ */
+#define ALPHABET_SIZE 26
+
+/**
+ * @brief 
+ * Constants for indicating status in caesar logic.
+ *
+ * SUCCESS:		on succes to logic.
+ * NULL_POINTER:	on fail to logic caused by NULL pointer.
+ * INVALID_KEY:		on fail to logic caused by key range (0 - 26).
+ * INVALID_INPUT:	on fail to logic caused by IO system.
+ */
 typedef enum
 {
 	SUCCESS = 0,
