@@ -87,12 +87,18 @@ int main(void)
 		if(isEncrypt == 1){
 			if(caesar_encrypt(input, output, key) 
 					!= CAESAR_SUCCESS){
-				fprintf(stderr, "\n%s[ERROR]: FAILED TO ENCRYPT SENCTENCE%s\n\n", COLOR_RED, COLOR_OFF);
+				fprintf(stderr, 
+					"\n%s[ERROR]: FAILED TO ENCRYPT SENCTENCE%s\n\n",
+				        COLOR_RED, COLOR_OFF);
+				free(output);
 				return CAESAR_INVALID_INPUT;
 		}}else if(isEncrypt == 0){
 			if(caesar_decrypt(input, output, key) 
 					!= CAESAR_SUCCESS){
-				fprintf(stderr, "\n%s[ERROR]: FAILED TO DECRYPT SENCTENCE%s\n\n", COLOR_RED, COLOR_OFF);
+				fprintf(stderr, 
+					"\n%s[ERROR]: FAILED TO DECRYPT SENCTENCE%s\n\n", 
+					COLOR_RED, COLOR_OFF);
+				free(output);
 				return CAESAR_INVALID_INPUT;
 		}}
 
@@ -147,7 +153,7 @@ inline caesar_status_t user_input(char* input, size_t size)
 		return CAESAR_INVALID_INPUT;
 	}
 
-
+	input[strcspn(input, "\n")] = '\0';
 
 	return CAESAR_SUCCESS;
 }
@@ -157,7 +163,7 @@ inline caesar_status_t file_input(char* path, char* input, size_t size)
 {
 	char buffer[BUFFER_SIZE];
 	FILE* fp;
-	size_t len[2];
+	size_t len;
 
 	printf("[Path]: ");
 	if(!scanf("%1023s", path)){
@@ -177,10 +183,9 @@ inline caesar_status_t file_input(char* path, char* input, size_t size)
 			break;
 		}
 		
-		len[0] = strlen(input);
-		len[1] = strlen(buffer);
+		len = strlen(input);
 
-		strncat(input, buffer, size - len[0]);
+		strncat(input, buffer, size - len - 1);
 	}
 	
 	fclose(fp);
