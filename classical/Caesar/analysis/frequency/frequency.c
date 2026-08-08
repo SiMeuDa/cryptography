@@ -17,12 +17,11 @@ double pow(double x, int y);
 
 int main(int argc, char* argv[])
 {
-	char buffer[1024], input_text[4 * 1024];
+	char buffer[1024] = {'\0'}, input_text[4 * 1024] = {'\0'};
 	double string_frequency[CAESAR_ALPHABET_SIZE] = {0.0};
 	int cat_len = 0;
 	FILE* fp;
 	_Bool isEnd = 0;
-	
 	
 	/**
 	 * @brief: Set file pointer with argument
@@ -39,7 +38,7 @@ int main(int argc, char* argv[])
 
 	}else if(strncmp(argv[1], "-f", 2) == 0){
 
-		fp = fopen("./build/test_input.txt", "r");
+		fp = fopen("./test_input.txt", "r");
 
 		if(fp == NULL){
 			fp = fopen("../test_input.txt", "r");
@@ -62,7 +61,7 @@ int main(int argc, char* argv[])
 	 */
 	do{
 		if(fgets(buffer, sizeof(buffer), fp) == NULL){
-			isEnd = 1;
+			break;
 		}
 
 	
@@ -119,7 +118,7 @@ int main(int argc, char* argv[])
 	}
 
 
-	double Chi = 0;
+	double Chi = 0.0;
 	
 	for(int i = 0; i < CAESAR_ALPHABET_SIZE; i++){
 		Chi += pow((string_frequency[i] - frequency_table[i]), 2) / frequency_table[i];
