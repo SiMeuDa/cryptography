@@ -56,7 +56,7 @@ typedef enum
 caesar_status_t caesar_encrypt(
 	const char* plaintext,
         char* ciphertext,
-	int* key
+	int key
 );
 
 /**
@@ -77,7 +77,7 @@ caesar_status_t caesar_encrypt(
 caesar_status_t caesar_decrypt(
 	const char* cipheredtext,
         char* deciphertext,
-	int* key
+	int key
 );
 
 #endif
