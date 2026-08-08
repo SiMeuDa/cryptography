@@ -66,6 +66,14 @@ Run brute-force analysis
 ./build/brute_force
 ```
 
+Run frequency analysis
+
+```bash
+./build/frequency
+```
+
+- test-caesar, brute-force, frequency support file IO using -f flag
+
 ## Reference
 
 - WIKIPEDIA (Caesar cipher)
