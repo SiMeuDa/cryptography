@@ -157,10 +157,10 @@ inline caesar_status_t file_input(char* path, char* input, size_t size)
 {
 	char buffer[BUFFER_SIZE];
 	FILE* fp;
-	int len[2];
+	size_t len[2];
 
 	printf("[Path]: ");
-	if(!scanf("%s", path)){
+	if(!scanf("%1023s", path)){
 		fprintf(stderr, "%s\n[ERROR]: INVALID INPUT%s\n\n", COLOR_RED, COLOR_OFF);
 		return CAESAR_INVALID_INPUT;
 	}
@@ -182,13 +182,18 @@ inline caesar_status_t file_input(char* path, char* input, size_t size)
 
 		strncat(input, buffer, size - len[0]);
 	}
+	
+	fclose(fp);
 
 	return CAESAR_SUCCESS;
 }
 
 inline static void file_print(char* path, char* output){
 	FILE* fp = fopen(path, "w");
-
+	if(fp == NULL){
+		fprintf(stderr, "\n%s[ERROR] FAILED TO OPEN FILE%s\n", COLOR_RED, COLOR_OFF);
+		return;
+	}
 	fprintf(fp, "%s", output);
 
 	fclose(fp);

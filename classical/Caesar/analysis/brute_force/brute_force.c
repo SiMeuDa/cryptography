@@ -68,6 +68,10 @@ int main(int argc, char* argv[])
 		printf("[Output(key = %d)]:\t%s", key, output_text);
 	}
 
+	if(fp != stdin){
+		fclose(fp);
+	}
+
 	free(output_text);
 
 	return CAESAR_SUCCESS;
