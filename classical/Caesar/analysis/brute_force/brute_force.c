@@ -59,7 +59,7 @@ int main(int argc, char* argv[])
 		if(caesar_encrypt(
 			input_text, 
 			output_text, 
-			&key
+			key
 		) != CAESAR_SUCCESS){
 			free(output_text);
 			fprintf(stderr, "[ERROR]: FAILED TO ENCRYPT MESSAGE\n");

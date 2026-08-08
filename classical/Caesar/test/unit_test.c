@@ -54,7 +54,7 @@ int main(int argc, char* argv[])
 		/**
 		 * 1 - 5 Test
 		 */
-		if(caesar_encrypt(ctest[i].str, output[0], &ctest[i].key)
+		if(caesar_encrypt(ctest[i].str, output[0], ctest[i].key)
 				!= CAESAR_SUCCESS){
 			fprintf(stderr, "[ERROR]: FAILED TO ENCRYPT STRING\n");
 		}
@@ -72,7 +72,7 @@ int main(int argc, char* argv[])
 
 		strncpy(output[2], output[0], len);
 		
-		caesar_decrypt(output[2], output[3], &ctest[i].key);
+		caesar_decrypt(output[2], output[3], ctest[i].key);
 
 		printf("[ROUND TEST]: ");
 		if(strcmp(ctest[i].str, output[3]) != 0){

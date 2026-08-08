@@ -41,12 +41,9 @@ int main(int argc, char* argv[])
 		fp = fopen("./test_input.txt", "r");
 
 		if(fp == NULL){
-			fp = fopen("../test_input.txt", "r");
-
-			if(fp == NULL){
-				fprintf(stderr, "[ERROR]: FAILED TO OPEN FILE\n");
-				return CAESAR_INVALID_INPUT;
-		}}
+			fprintf(stderr, "[ERROR]: FAILED TO OPEN FILE\n");
+			return CAESAR_INVALID_INPUT;
+		}
 	}else{
 		fprintf(stderr, "[ERROR]: INVALID ARGUMENT\n");
 		return CAESAR_INVALID_INPUT;

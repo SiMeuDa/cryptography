@@ -17,13 +17,15 @@
 caesar_status_t caesar_encrypt(
 	const char* plaintext,
 	char* ciphertext,
-	int* key
+	int key
 ){
 	/**
 	 * Check input value's validation
 	 */
-
-	if((*key < 0) || (*key > CAESAR_ALPHABET_SIZE)){
+	if(&key == NULL){
+		return CAESAR_NULL_POINTER;
+	}
+	if((key < 0) || (key > CAESAR_ALPHABET_SIZE)){
 		return CAESAR_INVALID_KEY;
 	}
 
@@ -61,42 +63,31 @@ caesar_status_t caesar_encrypt(
 		 * 4. Make alphabet sequence to char alphabet
 		 */
 
-		ciphertext[i] = ((plaintext[i] - to_number + *key) % CAESAR_ALPHABET_SIZE);
+		ciphertext[i] = ((plaintext[i] - to_number + key) % CAESAR_ALPHABET_SIZE);
 		ciphertext[i] += to_number;
 
 	}
 
 	ciphertext[text_len] = '\0';
 
-	/**
-	 * SECURE KEY ERASE
-	 *
-	 * if compiler support memset_s, use that
-	 * else erase key value to 0
-	 */
-/*
-#ifndef MULTI_CASE
-	#ifdef __STDC_LIB_EXT1__
-		memset_s(key, sizeof(*key), 0, sizeof(*key));
-	#else	
-		*key = 0;
-	#endif
-#endif
-*/
 	return CAESAR_SUCCESS;
 }
 
 caesar_status_t caesar_decrypt(
 	const char* cipheredtext,
 	char* deciphertext,
-	int* key
+	int key
 ){
 
 	/**
 	 * Check input value's validation
 	 */
 
-	if((*key < 0) || (*key > CAESAR_ALPHABET_SIZE)){
+	if(&key == NULL){
+		return CAESAR_NULL_POINTER;
+	}
+
+	if((key < 0) || (key > CAESAR_ALPHABET_SIZE)){
 		return CAESAR_INVALID_KEY;
 	}
 
@@ -108,7 +99,7 @@ caesar_status_t caesar_decrypt(
 	int text_len = strlen(cipheredtext);
 	char to_number; 
 
-	*key = 26 - *key;
+	key = 26 - key;
 
 	for(int i = 0; i < text_len; i++)
 	{
@@ -136,28 +127,12 @@ caesar_status_t caesar_decrypt(
 		 * 4. Make alphabet sequence to char alphabet
 		 */
 
-		deciphertext[i] = ((cipheredtext[i] - to_number + *key) % CAESAR_ALPHABET_SIZE);
+		deciphertext[i] = ((cipheredtext[i] - to_number + key) % CAESAR_ALPHABET_SIZE);
 		deciphertext[i] += to_number;
 	}
 
 	deciphertext[text_len] = '\0';
 	
-	*key = CAESAR_ALPHABET_SIZE - *key;
 
-	/**
-	 * SECURE KEY ERASE
-	 *
-	 * if compiler support memset_s, use that
-	 * else erase key value to 0
-	 */
-/*
-#ifndef MULTI_CASE
-	#ifdef __STDC_LIB_EXT1__
-		memset_s(key, sizeof(*key), 0, sizeof(*key));
-	#else	
-		*key = 0;
-	#endif
-#endif
-*/
 	return CAESAR_SUCCESS;
 }

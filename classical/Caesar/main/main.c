@@ -85,12 +85,12 @@ int main(void)
 		 * ENCRYPTION LOGIC
 		 */
 		if(isEncrypt == 1){
-			if(caesar_encrypt(input, output, &key) 
+			if(caesar_encrypt(input, output, key) 
 					!= CAESAR_SUCCESS){
 				fprintf(stderr, "\n%s[ERROR]: FAILED TO ENCRYPT SENCTENCE%s\n\n", COLOR_RED, COLOR_OFF);
 				return CAESAR_INVALID_INPUT;
 		}}else if(isEncrypt == 0){
-			if(caesar_decrypt(input, output, &key) 
+			if(caesar_decrypt(input, output, key) 
 					!= CAESAR_SUCCESS){
 				fprintf(stderr, "\n%s[ERROR]: FAILED TO DECRYPT SENCTENCE%s\n\n", COLOR_RED, COLOR_OFF);
 				return CAESAR_INVALID_INPUT;
