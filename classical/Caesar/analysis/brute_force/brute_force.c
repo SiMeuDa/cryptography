@@ -10,7 +10,7 @@ int main(int argc, char* argv[])
 	char* output_text;
 	FILE* fp = stdin;
 	void* ret_ptr;
-	size_t in_len, buf_len;
+	size_t in_len;
 
 	/**
 	 * Check validation of argument
@@ -35,13 +35,9 @@ int main(int argc, char* argv[])
 		}
 		
 		in_len = strlen(input_text);
-                buf_len = strlen(buffer);
 
-                if(sizeof(input_text) - in_len > buf_len){
-                        strncat(input_text, buffer, buf_len);
-                }else{
-                        strncat(input_text, buffer, in_len);
-                }
+                strncat(input_text, buffer, sizeof(input_text) - in_len);
+          
 	}while(fp != stdin);
 
 	output_text = (char*)malloc(sizeof(char) * (strlen(input_text) + 1));
