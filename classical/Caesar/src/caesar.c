@@ -34,16 +34,14 @@ caesar_status_t caesar_encrypt(
 		return CAESAR_NULL_POINTER;
 	}
 
-	int text_len = strlen(plaintext);
+	size_t text_len = strlen(plaintext);
 	char to_number;
 
-	for(int i = 0; i < text_len; i++)
+	for(size_t i = 0; i < text_len; i++)
 	{
 		/**
-		 * Check char's value
-		 * Set char value for shift logic
-		 * if value is alphabet, ready to shift
-		 * else non-alphabet save result
+		 * ready to shift alphabet
+		 * preserve non-alphabet
 		 */
 		if(plaintext[i] >= 'A' && plaintext[i] <= 'Z'){
 			to_number = 'A';
@@ -96,12 +94,12 @@ caesar_status_t caesar_decrypt(
 		return CAESAR_NULL_POINTER;
 	}
 
-	int text_len = strlen(cipheredtext);
+	size_t text_len = strlen(cipheredtext);
 	char to_number; 
 
 	key = 26 - key;
 
-	for(int i = 0; i < text_len; i++)
+	for(size_t i = 0; i < text_len; i++)
 	{
 		/**
 		 * Check char's value

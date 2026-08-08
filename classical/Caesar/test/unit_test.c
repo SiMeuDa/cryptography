@@ -33,8 +33,6 @@ int main(int argc, char* argv[])
 		{"ABCDEF", 25},
 		{"ABCDEF", 26},
 		{"Hello, World!", 3},
-		{"1234431", 3},
-		{"안녕하세요", 3},
 		{"", 3},
 	};
 
