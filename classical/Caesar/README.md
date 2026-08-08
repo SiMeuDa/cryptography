@@ -15,12 +15,16 @@
 
 ## Project Structure
 
+```text
 ├── include/
 ├── src/
 ├── analysis/
+│   ├── brute_force/
+│   └── frequency/
 ├── test/
 ├── docs/
 └── README.md
+```
 
 ## Build
 
