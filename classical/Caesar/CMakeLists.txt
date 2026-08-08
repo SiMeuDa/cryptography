@@ -3,7 +3,7 @@ cmake_minimum_required(VERSION 3.5...3.28)
 
 #set project name and language
 project(
-	CaesarTest
+	Caesar
 	LANGUAGES C)
 
 #add library(API) source code location
@@ -48,7 +48,7 @@ target_link_libraries(test_caesar
 
 #make test text file
 file(TOUCH 
-	"./test_input.txt"
+	"test/test_input.txt"
 )
 
 

@@ -38,7 +38,7 @@ int main(int argc, char* argv[])
 
 	}else if(strncmp(argv[1], "-f", 2) == 0){
 
-		fp = fopen("./test_input.txt", "r");
+		fp = fopen("test/test_input.txt", "r");
 
 		if(fp == NULL){
 			fprintf(stderr, "[ERROR]: FAILED TO OPEN FILE\n");
