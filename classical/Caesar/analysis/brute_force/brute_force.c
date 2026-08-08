@@ -1,4 +1,4 @@
-#include "../../src/caesar.c"
+#include "caesar.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>

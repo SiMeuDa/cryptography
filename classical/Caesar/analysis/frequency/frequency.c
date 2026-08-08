@@ -1,4 +1,4 @@
-#include "../../src/caesar.c"
+#include "caesar.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -107,7 +107,7 @@ int main(int argc, char* argv[])
 	}
 
 	/**
-	 * @brieft: Print out result
+	 * @brief: Print out result
 	 * 
 	 * 1. Divide for text_len
 	 * 2. Round to four decimal places
