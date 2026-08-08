@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-double frequency_table[ALPHABET_SIZE] = {
+double frequency_table[CAESAR_ALPHABET_SIZE] = {
 	0.082, 0.015, 0.028, 0.043,
 	0.127, 0.022, 0.020, 0.061,
 	0.070, 0.002, 0.008, 0.040,
@@ -18,14 +18,12 @@ double pow(double x, int y);
 int main(int argc, char* argv[])
 {
 	char buffer[1024], input_text[4 * 1024];
-	double string_frequency[ALPHABET_SIZE];
+	double string_frequency[CAESAR_ALPHABET_SIZE] = {0.0};
 	int cat_len = 0;
 	FILE* fp;
 	_Bool isEnd = 0;
 	
-	for(int i = 0; i < ALPHABET_SIZE; i++){
-		string_frequency[i] = 0;
-	}
+	
 	/**
 	 * @brief: Set file pointer with argument
 	 *
@@ -41,18 +39,18 @@ int main(int argc, char* argv[])
 
 	}else if(strncmp(argv[1], "-f", 2) == 0){
 
-		fp = fopen("./input.txt", "r");
+		fp = fopen("./build/test_input.txt", "r");
 
 		if(fp == NULL){
-			fp = fopen("../input.txt", "r");
+			fp = fopen("../test_input.txt", "r");
 
 			if(fp == NULL){
 				fprintf(stderr, "[ERROR]: FAILED TO OPEN FILE\n");
-				return INVALID_INPUT;
+				return CAESAR_INVALID_INPUT;
 		}}
 	}else{
 		fprintf(stderr, "[ERROR]: INVALID ARGUMENT\n");
-		return INVALID_INPUT;
+		return CAESAR_INVALID_INPUT;
 	}
 
 	/**
@@ -114,7 +112,7 @@ int main(int argc, char* argv[])
 	 */
 	printf("[RESULT]\n");
 
-	for(int i = 0; i < ALPHABET_SIZE; i++){
+	for(int i = 0; i < CAESAR_ALPHABET_SIZE; i++){
 		string_frequency[i] /= text_len;
 
 		printf("[%c]: %.3lf\n", (char)(i + 'A'), string_frequency[i]);
@@ -123,14 +121,14 @@ int main(int argc, char* argv[])
 
 	double Chi = 0;
 	
-	for(int i = 0; i < ALPHABET_SIZE; i++){
+	for(int i = 0; i < CAESAR_ALPHABET_SIZE; i++){
 		Chi += pow((string_frequency[i] - frequency_table[i]), 2) / frequency_table[i];
 	}
 
 	printf("\n[Chi-Square Goodness-of-Fit Test]: %.3lf\n", Chi);
 	
 
-	return SUCCESS;
+	return CAESAR_SUCCESS;
 }
 
 double pow(double x, int y){
