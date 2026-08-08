@@ -19,7 +19,7 @@ int main(int argc, char* argv[])
 	if(argc == 1){
 		printf("[Input Text]: ");
 	}else if(strncmp("-f", argv[1], 2) == 0){
-		fp = fopen("./build/test_input.txt", "r");
+		fp = fopen("./test_input.txt", "r");
 		if(fp == NULL){
 			fprintf(stderr, "[ERROR]: FAILED TO OPEN FILE\n");
 			return CAESAR_INVALID_FILE;
