@@ -112,7 +112,9 @@ int main(int argc, char* argv[])
 	printf("[RESULT]\n");
 
 	for(int i = 0; i < CAESAR_ALPHABET_SIZE; i++){
-		string_frequency[i] /= text_len;
+		if(text_len > 0){
+			string_frequency[i] /= text_len;
+		}
 
 		printf("[%c]: %.3lf\n", (char)(i + 'A'), string_frequency[i]);
 	}
@@ -133,10 +135,10 @@ int main(int argc, char* argv[])
 double pow(double x, int y){
 	double temp = x;
 	if(y > 0){
-		for(int i = 0; i < y; i++){
+		for(int i = 1; i < y; i++){
 			x *= temp;
 	}}else{
-		for(int i = 0; i > y; i--){
+		for(int i = 0; i >= y; i--){
 			x /= temp;
 	}}
 
