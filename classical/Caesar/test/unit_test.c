@@ -29,7 +29,7 @@ int main(int argc, char* argv[])
 		printf("[Input Text]: ");
 		fp = stdin;
 	}else if(strncmp("-f", argv[1], 3) == 0){
-		fp = fopen("test_input.txt", "r");
+		fp = fopen("./test_input.txt", "r");
 		if(fp == NULL){
 			fprintf(stderr, "[ERROR]: FAILED TO OPEN FILE\n");
 			return CAESAR_INVALID_FILE;
