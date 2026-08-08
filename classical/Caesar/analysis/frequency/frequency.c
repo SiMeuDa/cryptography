@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <math.h>
 
 double frequency_table[CAESAR_ALPHABET_SIZE] = {
 	0.082, 0.015, 0.028, 0.043,
@@ -13,13 +14,13 @@ double frequency_table[CAESAR_ALPHABET_SIZE] = {
 	0.020, 0.001
 };
 
-double pow(double x, int y);
 
 int main(int argc, char* argv[])
 {
 	char buffer[1024] = {'\0'}, input_text[4 * 1024] = {'\0'};
 	double string_frequency[CAESAR_ALPHABET_SIZE] = {0.0};
 	int cat_len = 0;
+	size_t alphabet_count = 0;
 	FILE* fp;
 	_Bool isEnd = 0;
 	
@@ -77,7 +78,7 @@ int main(int argc, char* argv[])
 
 	input_text[strlen(input_text)] = '\0';
 
-	int text_len = strlen(input_text);
+	size_t text_len = strlen(input_text);
 	char to_number;
 
 	/**
@@ -97,6 +98,7 @@ int main(int argc, char* argv[])
 			continue;
 		}
 
+		alphabet_count++;
 		string_frequency[input_text[i] - to_number]++;
 	}
 
@@ -109,8 +111,8 @@ int main(int argc, char* argv[])
 	printf("[RESULT]\n");
 
 	for(int i = 0; i < CAESAR_ALPHABET_SIZE; i++){
-		if(text_len > 0){
-			string_frequency[i] /= text_len;
+		if(alphabet_count > 0){
+			string_frequency[i] /= alphabet_count;
 		}
 
 		printf("[%c]: %.3lf\n", (char)(i + 'A'), string_frequency[i]);
@@ -127,17 +129,4 @@ int main(int argc, char* argv[])
 	
 
 	return CAESAR_SUCCESS;
-}
-
-double pow(double x, int y){
-	double temp = x;
-	if(y > 0){
-		for(int i = 1; i < y; i++){
-			x *= temp;
-	}}else{
-		for(int i = 0; i >= y; i--){
-			x /= temp;
-	}}
-
-	return x;
 }
