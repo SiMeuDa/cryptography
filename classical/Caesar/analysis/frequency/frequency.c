@@ -63,14 +63,7 @@ int main(int argc, char* argv[])
 		}
 
 	
-		if(strlen(buffer) > sizeof(input_text) - strlen(input_text)){
-			cat_len = sizeof(input_text) - strlen(input_text);
-			isEnd = 1;
-		}else{
-			cat_len = strlen(buffer);
-		}
-		
-		strncat(input_text, buffer, cat_len);
+		strncat(input_text, buffer, sizeof(input_text) - strlen(input_text));
 
 	}while(isEnd != 1);
 	
