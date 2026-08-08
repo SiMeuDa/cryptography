@@ -49,9 +49,9 @@ typedef enum
  * @param ciphertext 	Output buffer.
  * @param key		Shift value.
  * 
- * @return SUCCESS
- * @return NULL_POINTER
- * @return INVALID_KEY
+ * @return CAESAR_SUCCESS
+ * @return CAESAR_NULL_POINTER
+ * @return CAESAR_INVALID_KEY
  */
 caesar_status_t caesar_encrypt(
 	const char* plaintext,
@@ -70,9 +70,9 @@ caesar_status_t caesar_encrypt(
  * @param deciphertext 	Output buffer.
  * @param key		Shift value.
  * 
- * @return SUCCESS
- * @return NULL_POINTER
- * @return INVALID_KEY
+ * @return CAESAR_SUCCESS
+ * @return CAESAR_NULL_POINTER
+ * @return CAESAR_INVALID_KEY
  */
 caesar_status_t caesar_decrypt(
 	const char* cipheredtext,

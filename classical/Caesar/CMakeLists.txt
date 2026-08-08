@@ -75,6 +75,7 @@ else()
 		PRIVATE 
 		-O3
 		-Wno-unused-variable
+		-lm
 	)
 endif()
 

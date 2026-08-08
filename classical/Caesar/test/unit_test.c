@@ -57,7 +57,7 @@ int main(int argc, char* argv[])
 			fprintf(stderr, "[ERROR]: FAILED TO ENCRYPT STRING\n");
 		}
 		printf("[Encrypt]: %s\t", output[0]);
-		if(caesar_decrypt(ctest[i].str, output[1], &ctest[i].key)
+		if(caesar_decrypt(ctest[i].str, output[1], ctest[i].key)
 				!= CAESAR_SUCCESS){
 			fprintf(stderr, "[ERROR]: FAILED TO DECRYPT STRING\n");
 		}

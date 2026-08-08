@@ -62,7 +62,6 @@ int main(int argc, char* argv[])
 			break;
 		}
 
-	
 		strncat(input_text, buffer, sizeof(input_text) - strlen(input_text));
 
 	}while(isEnd != 1);
