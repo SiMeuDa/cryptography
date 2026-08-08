@@ -22,9 +22,6 @@ caesar_status_t caesar_encrypt(
 	/**
 	 * Check input value's validation
 	 */
-	if(&key == NULL){
-		return CAESAR_NULL_POINTER;
-	}
 	if((key < 0) || (key > CAESAR_ALPHABET_SIZE)){
 		return CAESAR_INVALID_KEY;
 	}
@@ -81,10 +78,6 @@ caesar_status_t caesar_decrypt(
 	 * Check input value's validation
 	 */
 
-	if(&key == NULL){
-		return CAESAR_NULL_POINTER;
-	}
-
 	if((key < 0) || (key > CAESAR_ALPHABET_SIZE)){
 		return CAESAR_INVALID_KEY;
 	}
@@ -97,7 +90,7 @@ caesar_status_t caesar_decrypt(
 	size_t text_len = strlen(cipheredtext);
 	char to_number; 
 
-	key = 26 - key;
+	key = CAESAR_ALPHABET_SIZE - key;
 
 	for(size_t i = 0; i < text_len; i++)
 	{
