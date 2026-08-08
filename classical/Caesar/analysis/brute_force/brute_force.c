@@ -36,7 +36,7 @@ int main(int argc, char* argv[])
 		
 		in_len = strlen(input_text);
 
-                strncat(input_text, buffer, sizeof(input_text) - in_len);
+                strncat(input_text, buffer, sizeof(input_text) - in_len - 1);
           
 	}while(fp != stdin);
 

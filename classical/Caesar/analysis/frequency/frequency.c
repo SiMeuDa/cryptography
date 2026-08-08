@@ -62,13 +62,14 @@ int main(int argc, char* argv[])
 			break;
 		}
 
-		strncat(input_text, buffer, sizeof(input_text) - strlen(input_text));
+		strncat(input_text, buffer, sizeof(input_text) - strlen(input_text) - 1);
 
 	}while(isEnd != 1);
 	
-	fclose(fp);
-
-	input_text[strlen(input_text)] = '\0';
+	if(fp != stdin){
+		fclose(fp);
+	}
+	
 
 	size_t text_len = strlen(input_text);
 	char to_number;
@@ -79,7 +80,7 @@ int main(int argc, char* argv[])
 	 * 1. Change character to integer value ignoring upper and lower case
 	 * 2. Add count
 	 */
-	for(int i = 0; i < text_len; i++){
+	for(size_t i = 0; i < text_len; i++){
 		if(input_text[i] >= 'A' &&
 			input_text[i] <= 'Z'){
 			to_number = 'A';
