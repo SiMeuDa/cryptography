@@ -10,27 +10,26 @@
  * This file implements the Caesar cipher.
  ******************************************************************************/
 
-#include "../include/caesar.h"
-#define __STDC_WANT_LIB_EXT1__ 1
+#include "caesar.h"
 #include <string.h>
 #include <stdlib.h>
 
 caesar_status_t caesar_encrypt(
 	const char* plaintext,
-	char** ciphertext,
-	volatile int key
+	char* ciphertext,
+	int* key
 ){
 	/**
 	 * Check input value's validation
 	 */
 
-	if((key < 0) || (key > ALPHABET_SIZE)){
-		return INVALID_KEY;
+	if((*key < 0) || (*key > CAESAR_ALPHABET_SIZE)){
+		return CAESAR_INVALID_KEY;
 	}
 
 	if((plaintext == NULL) ||
 	(ciphertext == NULL)){
-		return NULL_POINTER;
+		return CAESAR_NULL_POINTER;
 	}
 
 	int text_len = strlen(plaintext);
@@ -49,7 +48,7 @@ caesar_status_t caesar_encrypt(
 		}else if(plaintext[i] >= 'a' && plaintext[i] <= 'z'){
 			to_number = 'a';
 		}else{
-			(*ciphertext)[i] = plaintext[i];
+			ciphertext[i] = plaintext[i];
 			continue;
 		}
 
@@ -62,13 +61,12 @@ caesar_status_t caesar_encrypt(
 		 * 4. Make alphabet sequence to char alphabet
 		 */
 
-		(*ciphertext)[i] = ((plaintext[i] - to_number + key) % ALPHABET_SIZE);
-		(*ciphertext)[i] += to_number;
+		ciphertext[i] = ((plaintext[i] - to_number + *key) % CAESAR_ALPHABET_SIZE);
+		ciphertext[i] += to_number;
 
 	}
 
-	(*ciphertext)[text_len] = '\0';
-
+	ciphertext[text_len] = '\0';
 
 	/**
 	 * SECURE KEY ERASE
@@ -76,38 +74,41 @@ caesar_status_t caesar_encrypt(
 	 * if compiler support memset_s, use that
 	 * else erase key value to 0
 	 */
-#ifdef __STDC_LIB_EXT1__
-	memset_s(&key, sizeof(key), 0, sizeof(key));
-#else	
-	key = 0;
+/*
+#ifndef MULTI_CASE
+	#ifdef __STDC_LIB_EXT1__
+		memset_s(key, sizeof(*key), 0, sizeof(*key));
+	#else	
+		*key = 0;
+	#endif
 #endif
-
-	return SUCCESS;
+*/
+	return CAESAR_SUCCESS;
 }
 
 caesar_status_t caesar_decrypt(
 	const char* cipheredtext,
-	char** deciphertext,
-	int key
+	char* deciphertext,
+	int* key
 ){
 
 	/**
 	 * Check input value's validation
 	 */
 
-	if((key < 0) || (key > ALPHABET_SIZE)){
-		return INVALID_KEY;
+	if((*key < 0) || (*key > CAESAR_ALPHABET_SIZE)){
+		return CAESAR_INVALID_KEY;
 	}
 
 	if((cipheredtext == NULL) ||
 	(deciphertext == NULL)){
-		return NULL_POINTER;
+		return CAESAR_NULL_POINTER;
 	}
 
 	int text_len = strlen(cipheredtext);
 	char to_number; 
 
-	key = 26 - key;
+	*key = 26 - *key;
 
 	for(int i = 0; i < text_len; i++)
 	{
@@ -122,7 +123,7 @@ caesar_status_t caesar_decrypt(
 		}else if(cipheredtext[i] >= 'a' && cipheredtext[i] <= 'z'){
 			to_number = 'a';
 		}else{
-			(*deciphertext)[i] = cipheredtext[i];
+			deciphertext[i] = cipheredtext[i];
 			continue;
 		}
 
@@ -135,11 +136,13 @@ caesar_status_t caesar_decrypt(
 		 * 4. Make alphabet sequence to char alphabet
 		 */
 
-		(*deciphertext)[i] = ((cipheredtext[i] - to_number + key) % ALPHABET_SIZE);
-		(*deciphertext)[i] += to_number;
+		deciphertext[i] = ((cipheredtext[i] - to_number + *key) % CAESAR_ALPHABET_SIZE);
+		deciphertext[i] += to_number;
 	}
 
-	(*deciphertext)[text_len] = '\0';
+	deciphertext[text_len] = '\0';
+	
+	*key = CAESAR_ALPHABET_SIZE - *key;
 
 	/**
 	 * SECURE KEY ERASE
@@ -147,11 +150,14 @@ caesar_status_t caesar_decrypt(
 	 * if compiler support memset_s, use that
 	 * else erase key value to 0
 	 */
-#ifdef __STDC_LIB_EXT1__
-	memset_s(&key, sizeof(key), 0, sizeof(key));
-#else	
-	key = 0;
+/*
+#ifndef MULTI_CASE
+	#ifdef __STDC_LIB_EXT1__
+		memset_s(key, sizeof(*key), 0, sizeof(*key));
+	#else	
+		*key = 0;
+	#endif
 #endif
-	
-	return SUCCESS;
+*/
+	return CAESAR_SUCCESS;
 }

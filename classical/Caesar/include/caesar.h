@@ -18,7 +18,7 @@
  * Constants for alphabet's range
  * size of alphabet is 26 (A - Z)
  */
-#define ALPHABET_SIZE 26
+#define CAESAR_ALPHABET_SIZE 26
 
 /**
  * @brief 
@@ -31,10 +31,11 @@
  */
 typedef enum
 {
-	SUCCESS = 0,
-	NULL_POINTER,
-	INVALID_KEY,
-	INVALID_INPUT
+	CAESAR_SUCCESS = 0,
+	CAESAR_NULL_POINTER,
+	CAESAR_INVALID_KEY,
+	CAESAR_INVALID_INPUT,
+	CAESAR_INVALID_FILE
 
 } caesar_status_t;
 
@@ -54,8 +55,8 @@ typedef enum
  */
 caesar_status_t caesar_encrypt(
 	const char* plaintext,
-        char** ciphertext,
-	int key
+        char* ciphertext,
+	int* key
 );
 
 /**
@@ -75,8 +76,8 @@ caesar_status_t caesar_encrypt(
  */
 caesar_status_t caesar_decrypt(
 	const char* cipheredtext,
-        char** deciphertext,
-	int key
+        char* deciphertext,
+	int* key
 );
 
 #endif
