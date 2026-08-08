@@ -43,14 +43,10 @@ target_compile_options(test_caesar
 )
 
 target_link_libraries(test_caesar
-	PRIVATE caesar
+	PRIVATE 
+	caesar
+	m
 )
-
-#make test text file
-file(TOUCH 
-	"test/test_input.txt"
-)
-
 
 add_executable (brute_force
 	analysis/brute_force/brute_force.c
@@ -75,7 +71,6 @@ else()
 		PRIVATE 
 		-O3
 		-Wno-unused-variable
-		-lm
 	)
 endif()
 
