@@ -6,7 +6,7 @@
 
 int main(int argc, char* argv[])
 {
-	char buffer[BUFFER_SIZE], input_text[8 * BUFFER_SIZE];
+	char buffer[BUFFER_SIZE] = {'\0'}, input_text[8 * BUFFER_SIZE] = {'\0'};
 	char* output_text;
 	FILE* fp = stdin;
 	void* ret_ptr;
