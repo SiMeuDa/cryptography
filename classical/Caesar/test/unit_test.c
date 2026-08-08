@@ -5,17 +5,14 @@
 #define BUFFER_SIZE 1024
 
 typedef struct{
-	char str[128];
+	char plaintext[256];
+	char ciphertext[256];
 	int key;
 }CASE_TEST;
 
 
 int main(int argc, char* argv[])
 {
-	int key;
-	FILE* fp;
-	void* ret_ptr = NULL;
-
 	/** Expected Checking List
 	 * 1. Basic En/Decryption
 	 * 2. Boundary Value
@@ -26,68 +23,105 @@ int main(int argc, char* argv[])
 	 */
 
 	CASE_TEST ctest[] = {
-		{"ABCDEF", 3},
-		{"abcdef", 3},
-		{"UVWXYZ", 3},
-		{"ABCDEF", 0},
-		{"ABCDEF", 25},
-		{"ABCDEF", 26},
-		{"Hello, World!", 3},
-		{"", 3},
+	    {"ABCDEF", "DEFGHI", 3},
+	    {"abcdef", "defghi", 3},
+	    {"UVWXYZ", "XYZABC", 3},
+	    {"ABCDEF", "ABCDEF", 0},
+	    {"ABCDEF", "ZABCDE", 25},
+	    {"ABCDEF", "ABCDEF", 26},
+	    {"Hello, World!", "Khoor, Zruog!", 3},
+	    {"", "", 3},
 	};
 
-	char output[4][BUFFER_SIZE] = {
-		{'\0'},
+	char output[3][BUFFER_SIZE] = {
 		{'\0'},
 		{'\0'},
 		{'\0'}
 	};
 
 	size_t len;
+	
+	for(size_t i = 0; i < 8; i++)
+	{
+		/**
+		 * Basics Encryption Test
+		 */
 
-	for(size_t i = 0; i < sizeof(ctest) / sizeof(CASE_TEST); i++){
+		if(caesar_encrypt(ctest[i].plaintext, output[0], ctest[i].key)
+				!= CAESAR_SUCCESS){
+			printf("[SYSTEM]: Fail");
+		}else{
+			printf("[SYSTEM]: Success");
+		}
+		printf(" to Encryption\n");
 		
-		len = strlen(ctest[i].str);
+		if(strcmp(ctest[i].ciphertext, output[0]) == 0){
+			printf("[SYSTEM]: Success");
+		}else{
+			printf("[SYSTEM]: Fail");
+		}
+		printf(" to verify encryption logic\n");
 
 		/**
-		 * 1 - 5 Test
+		 * Basic Decryption Test
 		 */
-		if(caesar_encrypt(ctest[i].str, output[0], ctest[i].key)
-				!= CAESAR_SUCCESS){
-			fprintf(stderr, "[ERROR]: FAILED TO ENCRYPT STRING\n");
-		}
-		printf("[Encrypt]: %s\t", output[0]);
-		if(caesar_decrypt(ctest[i].str, output[1], ctest[i].key)
-				!= CAESAR_SUCCESS){
-			fprintf(stderr, "[ERROR]: FAILED TO DECRYPT STRING\n");
-		}
-
-		printf("[Decrypt]: %s\n", output[1]);
 		
-		/*
-		 * Round trip Test
-		 */
-
-		strncpy(output[2], output[0], len);
-		
-		caesar_decrypt(output[2], output[3], ctest[i].key);
-
-		printf("[ROUND TEST]: ");
-		if(strcmp(ctest[i].str, output[3]) != 0){
-			printf("FAIL TO ROUND TEST\n");
+		if(caesar_decrypt(ctest[i].ciphertext, output[1], ctest[i].key)
+				!= CAESAR_SUCCESS){
+			printf("[SYSTEM]: Fail");
 		}else{
-			printf("SUCCESS TO ROUND TEST\n");
+			printf("[SYSTEM]: Success");
+		}
+		printf(" to Decryption\n");
+		
+		if(strncmp(ctest[i].plaintext, output[1], strlen(ctest[i].plaintext)) == 0){
+			printf("[SYSTEM]: Success");
+		}else{
+			printf("[SYSTEM]: Fail");
 		}
 
-		printf("\n");
+		printf(" to verify decryption logic\n");
 
-		for(size_t i = 0; i < 4; i++){
-			for(size_t j = 0 ; j < len ; j++){
-				output[i][j] = '\0';
-			}
+		/**
+		 * Round-Trip Test
+		 */
+
+		caesar_decrypt(output[0], output[2], ctest[i].key);
+
+		if(strncmp(ctest[i].plaintext, output[2], 
+				strlen(ctest[i].plaintext)) == 0){
+			printf("[SYSTEM]: Success");
+		}else{
+			printf("[SYSTEM]: Fail");
 		}
 
+		printf(" to round trip test\n\n");
+
+		for(int j = 0;j < 3; j++){
+			memset(output[j], sizeof(output[j]), sizeof(output[j]));
+		}
 	}
-	
+
+	/**
+	 * NULL value Test
+	 */
+
+	if(caesar_encrypt(NULL, output[0], ctest[8].key) == CAESAR_NULL_POINTER){
+		printf("[SYSTEM]: Sucess");
+	}else{
+		printf("[SYSTEM]: Fail");
+	}
+
+	printf(" to NULL value Test (Encryption)\n");
+	if(caesar_decrypt(NULL, output[0], ctest[8].key)
+			== CAESAR_NULL_POINTER){
+		printf("[SYSTEM]: Success");
+	}else{
+		printf("[SYSTEM]: Fail");
+	}
+
+	printf(" to NULL value Test (Decryption)\n");
+
+
 	return CAESAR_SUCCESS;
 }
