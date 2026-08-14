@@ -33,6 +33,8 @@ int main(int argc, char* argv[])
 	    {"", "", 3},
 	};
 
+	int test_key = 3;
+
 	char output[3][BUFFER_SIZE] = {
 		{'\0'},
 		{'\0'},
@@ -74,7 +76,7 @@ int main(int argc, char* argv[])
 		}
 		printf(" to Decryption\n");
 		
-		if(strncmp(ctest[i].plaintext, output[1], strlen(ctest[i].plaintext)) == 0){
+		if(strcmp(ctest[i].plaintext, output[1]) == 0){
 			printf("[SYSTEM]: Success");
 		}else{
 			printf("[SYSTEM]: Fail");
@@ -98,7 +100,7 @@ int main(int argc, char* argv[])
 		printf(" to round trip test\n\n");
 
 		for(int j = 0;j < 3; j++){
-			memset(output[j], sizeof(output[j]), sizeof(output[j]));
+			memset(output[j], '\0', sizeof(output[j]));
 		}
 	}
 
@@ -106,14 +108,14 @@ int main(int argc, char* argv[])
 	 * NULL value Test
 	 */
 
-	if(caesar_encrypt(NULL, output[0], ctest[8].key) == CAESAR_NULL_POINTER){
+	if(caesar_encrypt(NULL, output[0], ctest[0].key) == CAESAR_NULL_POINTER){
 		printf("[SYSTEM]: Sucess");
 	}else{
 		printf("[SYSTEM]: Fail");
 	}
 
 	printf(" to NULL value Test (Encryption)\n");
-	if(caesar_decrypt(NULL, output[0], ctest[8].key)
+	if(caesar_decrypt(NULL, output[0], test_key)
 			== CAESAR_NULL_POINTER){
 		printf("[SYSTEM]: Success");
 	}else{
