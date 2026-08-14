@@ -9,12 +9,12 @@
 
 ## Project Structure
 
-├── include/
-├── src/
-├── analysis/
-├── test/
-├── docs/
-└── README.md
+├── include/    <br>
+├── src/        <br>
+├── analysis/   <br>
+├── test/       <br>
+├── docs/       <br>
+└── README.md   <br>
 
 ## Build
 
