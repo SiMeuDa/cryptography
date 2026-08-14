@@ -45,7 +45,6 @@ target_compile_options(test_caesar
 target_link_libraries(test_caesar
 	PRIVATE 
 	caesar
-	m
 )
 
 add_executable (brute_force
@@ -60,20 +59,7 @@ add_executable (frequency
 	analysis/frequency/frequency.c
 )
 
-#Turn off warning sign
-if(MSVC)
-	target_compile_options(frequency
-		PRIVATE 
-		/wd4996
-	)
-else()
-	target_compile_options(frequency
-		PRIVATE 
-		-O3
-		-Wno-unused-variable
-	)
-endif()
-
 target_link_libraries(frequency
 	PRIVATE caesar
+	PRIVATE m
 )
