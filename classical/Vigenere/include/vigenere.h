@@ -35,7 +35,8 @@ typedef enum
         VIGENERE_SUCCESS = 0,
         VIGENERE_NULL_POINTER,
         VIGENERE_INVALID_KEY,
-        VIGENERE_INVALID_INPUT
+        VIGENERE_INVALID_INPUT,
+	VIGENERE_INVALID_FILE
 
 } vigenere_status_t;
 
