@@ -1,7 +1,8 @@
 ## Introduction
 
-# mathmatic
-- moular archimatic
+### mathmatic
+- moular archimatic (left remainer, (symbol: % or mod))
+    - ex. 10 mod 3 = 1
 - C<sub>i</sub> = (P<sub>i</sub> + K<sub>i</sub> ) mod 26
 
 ## Algorithm
