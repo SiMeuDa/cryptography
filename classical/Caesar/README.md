@@ -52,7 +52,7 @@ The generated executables will be located in the `build/` directory.
 Run the main program
 
 ```bash
-./build/caesar
+./build/main
 ```
 
 Run unit tests
