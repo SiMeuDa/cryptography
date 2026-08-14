@@ -94,11 +94,11 @@ int main(int argc, char* argv[])
 
 		caesar_decrypt(output[0], output[2], ctest[i].key);
 
-		if(strncmp(ctest[i].plaintext, output[2], 
-				strlen(ctest[i].plaintext)) == 0){
+		if(strcmp(ctest[i].plaintext, output[2]) == 0){
 			printf("[SYSTEM]: Success");
 		}else{
 			printf("[SYSTEM]: Fail");
+			return 1;
 		}
 
 		printf(" to round trip test\n\n");
@@ -112,7 +112,10 @@ int main(int argc, char* argv[])
 	 * NULL value Test
 	 */
 
-	if(caesar_encrypt(NULL, output[0], ctest[0].key) == CAESAR_NULL_POINTER){
+	if((caesar_encrypt(NULL, output[0], test_key) 
+		== CAESAR_NULL_POINTER) ||
+	caesar_encrypt(output[2], NULL, test_key)
+		== CAESAR_NULL_POINTER){
 		printf("[SYSTEM]: Sucess");
 	}else{
 		printf("[SYSTEM]: Fail");
@@ -120,8 +123,10 @@ int main(int argc, char* argv[])
 	}
 
 	printf(" to NULL value Test (Encryption)\n");
-	if(caesar_decrypt(NULL, output[0], test_key)
-			== CAESAR_NULL_POINTER){
+	if((caesar_decrypt(NULL, output[0], test_key)
+		== CAESAR_NULL_POINTER) ||
+	caesar_decrypt(output[2], NULL, test_key)
+		== CAESAR_NULL_POINTER){
 		printf("[SYSTEM]: Success");
 	}else{
 		printf("[SYSTEM]: Fail");
