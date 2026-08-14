@@ -1,5 +1,5 @@
 #set cmake's minimum version
-cmake_minimum_required(VERSION 3.5...3.28)
+cmake_minimum_required(VERSION 3.20)
 
 #set project name and language
 project(
@@ -17,6 +17,7 @@ target_include_directories(caesar
 	${CMAKE_CURRENT_SOURCE_DIR}/include
 )
 
+####################### MAIN PROGRAM ##########################
 #add excute file
 add_executable(main
 	main/main.c
@@ -33,6 +34,7 @@ target_link_libraries(main
 	PRIVATE caesar
 )
 
+####################### TEST PROGRAM ##########################
 add_executable (test_caesar
 	test/unit_test.c
 )
@@ -47,6 +49,15 @@ target_link_libraries(test_caesar
 	caesar
 )
 
+enable_testing()
+
+add_test(
+	NAME CaesarTests
+	COMMAND test_caesar
+)
+
+####################### BRUTE_FORCE PROGRAM ##########################
+
 add_executable (brute_force
 	analysis/brute_force/brute_force.c
 )
@@ -55,6 +66,7 @@ target_link_libraries(brute_force
 	PRIVATE caesar
 )
 
+####################### FREQUENCY CHECKING PROGRAM ##########################
 add_executable (frequency
 	analysis/frequency/frequency.c
 )
