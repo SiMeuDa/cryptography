@@ -25,19 +25,17 @@
  * @brief 
  * Constants for indicating status in vigenere logic.
  *
- * SUCCESS:             on succes to logic.
- * NULL_POINTER:        on fail to logic caused by NULL pointer.
- * INVALID_KEY:         on fail to logic caused by key range (0 - 26).
- * INVALID_INPUT:       on fail to logic caused by IO system.
+ * VIGENERE_SUCCESS:             on succes to logic.
+ * VIGENERE_NULL_POINTER:        on fail to logic caused by NULL pointer.
+ * VIGENERE_INVALID_KEY:         on fail to logic caused by key range (0 - 26).
+ * VIGENERE_INVALID_INPUT:       on fail to logic caused by IO system.
  */
 typedef enum
 {
-        SUCCESS = 0,
-        NULL_POINTER,
-        INVALID_KEY,
-        INVALID_INPUT,
-	FAIL_FILEIO,
-	FAIL_STDIO
+        VIGENERE_SUCCESS = 0,
+        VIGENERE_NULL_POINTER,
+        VIGENERE_INVALID_KEY,
+        VIGENERE_INVALID_INPUT
 
 } vigenere_status_t;
 

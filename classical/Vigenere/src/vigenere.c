@@ -24,19 +24,20 @@ vigenere_status_t vigenere_encrypt(
 	 * Check NULL pointer
 	 */
 	if((key == NULL) || (strlen(key) == 0)){
-		return INVALID_KEY;
+		return VIGENERE_INVALID_KEY;
 	}
 
 	if((plaintext == NULL) ||
 	(ciphertext == NULL)){
-		return NULL_POINTER;
+		return VIGENERE_NULL_POINTER;
 	}
 
 	int text_len = strlen(plaintext), key_len = strlen(key), key_index = 0, count = 0;
 	char to_number;
 
 	/**
-	 * Check key value' validation & Change to Integer 
+	 * Check key value' validation 
+	 * Map to Integer 
 	 */
 	for(int i = 0; i < key_len; i++){
 		if(key[i] >= 'A' &&
@@ -46,7 +47,7 @@ vigenere_status_t vigenere_encrypt(
 			key[i] <= 'z'){
 			key[i] -= 'a';
 		}else{
-			return INVALID_KEY;
+			return VIGENERE_INVALID_KEY;
 		}
 	}
 
@@ -99,7 +100,7 @@ vigenere_status_t vigenere_encrypt(
 		key[i] = '\0';
 #endif
 
-	return SUCCESS;
+	return VIGENERE_SUCCESS;
 }
 
 vigenere_status_t vigenere_decrypt(
@@ -113,21 +114,20 @@ vigenere_status_t vigenere_decrypt(
 	 * Check NULL pointer
 	 */
 	if((key == NULL) || (strlen(key) == 0)){
-		return INVALID_KEY;
+		return VIGENERE_INVALID_KEY;
 	}
 
 	if((cipheredtext == NULL) ||
 	(deciphertext == NULL)){
-		return NULL_POINTER;
+		return VIGENERE_NULL_POINTER;
 	}
 
 	int text_len = strlen(cipheredtext), key_len = strlen(key), count = 0;
 	char to_number; 
 
 	/**
-	 * Check key value' validation & Change to Integer 
-	 * Check key contain non-alphabet
-	 * Change to integer don't related to alphabet case
+	 * Check key value' validation 
+	 * Map to Integer 
 	 */
 	for(int i = 0; i < key_len; i++){
 		if(key[i] >= 'A' &&
@@ -137,7 +137,7 @@ vigenere_status_t vigenere_decrypt(
 			key[i] <= 'z'){
 			key[i] -= 'a';
 		}else{
-			return INVALID_KEY;
+			return VIGENERE_INVALID_KEY;
 		}
 		key[i] = ALPHABET_SIZE - key[i];
 	}
@@ -190,5 +190,5 @@ vigenere_status_t vigenere_decrypt(
 		key[i] = '\0';
 #endif
 
-	return SUCCESS;
+	return VIGENERE_SUCCESS;
 }
