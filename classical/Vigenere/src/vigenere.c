@@ -15,7 +15,7 @@
 #include <stdlib.h>
 
 vigenere_status_t vigenere_encrypt(
-	const char* plaintext,
+	char* plaintext,
 	char* ciphertext,
 	char* key
 ){
@@ -31,6 +31,7 @@ vigenere_status_t vigenere_encrypt(
 	(ciphertext == NULL)){
 		return VIGENERE_NULL_POINTER;
 	}
+	
 
 	int text_len = strlen(plaintext), key_len = strlen(key), key_index = 0, count = 0;
 	char to_number;
@@ -50,6 +51,7 @@ vigenere_status_t vigenere_encrypt(
 			return VIGENERE_INVALID_KEY;
 		}
 	}
+
 
 	for(int i = 0; i < text_len; i++)
 	{
@@ -84,27 +86,18 @@ vigenere_status_t vigenere_encrypt(
 
 	}
 
+
 	ciphertext[text_len] = '\0';
-
-
-	/**
-	 * SECURE KEY ERASE
-	 *
-	 * if compiler support memset_s, use that
-	 * else erase key value to 0
-	 */
-#ifdef __STDC_LIB_EXT1__
-	memset_s(key, key_len, 0, key_len);
-#else	
-	for(int i = 0; i < key_len; i++)
-		key[i] = '\0';
-#endif
+	
+	for(int i = 0; i < key_len; i++){
+		key[i] += 'A';
+	}
 
 	return VIGENERE_SUCCESS;
 }
 
 vigenere_status_t vigenere_decrypt(
-	const char* cipheredtext,
+	char* cipheredtext,
 	char* deciphertext,
 	char* key
 ){
@@ -177,18 +170,10 @@ vigenere_status_t vigenere_decrypt(
 
 	deciphertext[text_len] = '\0';
 
-	/**
-	 * SECURE KEY ERASE
-	 *
-	 * if compiler support memset_s, use that
-	 * else erase key value to 0
-	 */
-#ifdef __STDC_LIB_EXT1__
-	memset_s(key, key_len, 0, key_len);
-#else	
-	for(int i = 0; i < key_len; i++)
-		key[i] = '\0';
-#endif
+	for(int i = 0; i < key_len; i++){
+		key[i] = ALPHABET_SIZE - key[i];
+		key[i] += 'A';
+	}
 
 	return VIGENERE_SUCCESS;
 }

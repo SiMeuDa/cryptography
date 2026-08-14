@@ -55,7 +55,7 @@ typedef enum
  */
 
 vigenere_status_t vigenere_encrypt(
-        const char* plaintext,
+        char* plaintext,
         char* ciphertext,
         char* key
 );
@@ -75,8 +75,8 @@ vigenere_status_t vigenere_encrypt(
  * @return NULL_POINTER
  * @return INVALID_KEY
  */
-vigenere_status_t caesar_decrypt(
-        const char* cipheredtext,
+vigenere_status_t vigenere_decrypt(
+        char* cipheredtext,
         char* deciphertext,
         char* key
 );
