@@ -73,7 +73,7 @@ int main(void)
 			return CAESAR_INVALID_INPUT;
 		}
 				
-		output = (char*)malloc(sizeof(char) * strlen(input) + 1);
+		output = (char*)malloc(sizeof(char) * (strlen(input) + 1));
 	
 		if(output == NULL){
 			fprintf(stderr, "\n%s[ERROR]: FAILED TO ALLOCATE MEMORY%s\n\n", COLOR_RED, COLOR_OFF);
