@@ -52,6 +52,7 @@ int main(int argc, char* argv[])
 		if(caesar_encrypt(ctest[i].plaintext, output[0], ctest[i].key)
 				!= CAESAR_SUCCESS){
 			printf("[SYSTEM]: Fail");
+			return 1;
 		}else{
 			printf("[SYSTEM]: Success");
 		}
@@ -61,6 +62,7 @@ int main(int argc, char* argv[])
 			printf("[SYSTEM]: Success");
 		}else{
 			printf("[SYSTEM]: Fail");
+			return 1;
 		}
 		printf(" to verify encryption logic\n");
 
@@ -71,6 +73,7 @@ int main(int argc, char* argv[])
 		if(caesar_decrypt(ctest[i].ciphertext, output[1], ctest[i].key)
 				!= CAESAR_SUCCESS){
 			printf("[SYSTEM]: Fail");
+			return 1;
 		}else{
 			printf("[SYSTEM]: Success");
 		}
@@ -80,6 +83,7 @@ int main(int argc, char* argv[])
 			printf("[SYSTEM]: Success");
 		}else{
 			printf("[SYSTEM]: Fail");
+			return 1;
 		}
 
 		printf(" to verify decryption logic\n");
@@ -112,6 +116,7 @@ int main(int argc, char* argv[])
 		printf("[SYSTEM]: Sucess");
 	}else{
 		printf("[SYSTEM]: Fail");
+		return 1;
 	}
 
 	printf(" to NULL value Test (Encryption)\n");
@@ -120,6 +125,7 @@ int main(int argc, char* argv[])
 		printf("[SYSTEM]: Success");
 	}else{
 		printf("[SYSTEM]: Fail");
+		return 1;
 	}
 
 	printf(" to NULL value Test (Decryption)\n");
