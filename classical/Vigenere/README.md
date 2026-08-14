@@ -1,9 +1,11 @@
 ## Introduction
 
+
+
 ### mathmatic
 - moular archimatic (left remainer, (symbol: % or mod))
     - ex. 10 mod 3 = 1
-- C<sub>i</sub> = (P<sub>i</sub> + K<sub>i</sub> ) mod 26
+- Cipher Equation: C<sub>i</sub> = (P<sub>i</sub> + K<sub>i</sub> ) mod 26
 
 ## Algorithm
 
@@ -42,21 +44,15 @@ The generated executables will be located in the `build/` directory.
 Run the main program
 
 ```bash
-./build/
+./build/main
 ```
 
 Run unit tests
 
 ```bash
-./build/
-```
-
-Run brute-force analysis
-
-```bash
-./build/brute_force
+./build/test_vigenere
 ```
 
 ## Reference
 
-- WIKIPEDIA (Caesar cipher)
+- WIKIPEDIA (Vigenere cipher)
