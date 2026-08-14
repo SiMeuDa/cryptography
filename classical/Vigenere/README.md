@@ -2,7 +2,7 @@
 
 # mathmatic
 - moular archimatic
-- C <small> i </small> = (P <small> i </small> + K <small> i </small> ) mod 26
+- C<small>i</small> = (P<small>i</small> + K<small>i</small> ) mod 26
 
 ## Algorithm
 
